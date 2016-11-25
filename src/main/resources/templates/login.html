@@ -1,0 +1,50 @@
+
+
+<html  lang="en"    xmlns="http://www.w3.org/1999/xhtml"
+                    xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Bootstrap Snippet: Login Form</title>
+
+
+  <link rel='stylesheet prefetch' href="http://netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css"
+        th:href="@{http://netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css}"/>
+
+      <link rel="stylesheet" href="css/style1.css" th:href="@{/css/style1.css}"/>
+
+
+</head>
+
+
+
+
+<body>
+<div class="col-md-4">
+</div>
+<div class="col-md-4">
+
+
+<div th:if="${param.error}" class="alert alert-error">
+    Invalid username and password.
+</div>
+<div th:if="${param.logout}" class="alert alert-success">
+    You have been logged out.
+</div>
+<form name="f" th:action="@{/login}" method="post">
+    <div class="wrapper">
+    <form class="form-signin">
+      <h2 class="form-signin-heading">Please login</h2>
+      <input type="text" class="form-control" name="username" placeholder="Email Address" required="" autofocus="" />
+      <input type="password" class="form-control" name="password" placeholder="Password" required=""/>
+
+        <br/>
+      <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
+    </form>
+  </div>
+    </form>
+</div>
+
+</body>
+</html>

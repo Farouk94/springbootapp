@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>My Profile</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet"   th:href="@{/css/bootstrap.min.css}"/>
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900'  th:href="@{http://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900}"
+          rel='stylesheet' type='text/css'/>
+    <link href="/css/style.css" rel="stylesheet"  th:href="@{/css/style.css}"/>
+    <link rel="stylesheet" type="text/css" href="../static/shortcodes/shortcodes.css"   th:href="@{/shortcodes/shortcodes.css}" />
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"
+            th:src="@{https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js}"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"
+            th:src="@{https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js}"></script>
+    <![endif]-->
+</head>
+<body>
+<header class="main__header">
+    <div class="container">
+        <nav class="navbar navbar-default" role="navigation">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="menuBar">
+                <ul class="menu">
+                    <li ><a href="index.html"   th:href="@{/index}">Home</a></li>
+                    <li class="dropdown">
+
+
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"> <span class="glyphicon glyphicon-user"></span> My profil</a>
+                        <ul>
+                            <li >
+                                <a href="profil.html" th:href="@{/profil}" >See my profile <span class="glyphicon glyphicon-user" ></span></a>
+
+                            </li>
+                            <li><a href="editprofil.html" th:href="@{/edit/profil}">Edit my profile <span class="glyphicon glyphicon-pencil"></span></a></li>
+                            <li>
+                                <a href="groupsowner.html" th:href="@{/mygroups}" >My groups <span class="glyphicon glyphicon-user" style="font-size:18px;"></span><span class="glyphicon glyphicon-user"></span></a>
+
+                            </li>
+                        </ul>
+                    <li ><a href="users.html" th:href="@{/otherusers}">Other users</a></li>
+                    </li>
+                    <li><a href="left_sidebar.html" ></a> </li>
+                </ul>
+                <ul class="menu m_right">
+                    <li ><a href="editgroup.html" th:href="@{/creategroup}">Create group </a></li>
+                    <li ><a href="groupsshow.html" th:href="@{/groups}">View all groups</a></li>
+
+                </ul>
+            </div>
+            <div class="navbar-header">
+                <h1 class="navbar-brand"><a href="index.html" th:href="@{/index}">WS TSE </a></h1>
+                <a href="#" onClick="javascript.void()" class="submenu">Menus</a> </div>
+            <!-- /.navbar-collapse -->
+        </nav>
+    </div>
+</header>
+
+<section class="main__middle__container">
+    <div class="titler blog text-center">
+        <div class="seper"></div>
+        <h2 class="page__title">View my profil</h2>
+        <div class="seper"></div>
+    </div>
+    <div class="container">
+        <div class="row no_padding title__block nothing no-margin">
+
+                <h3>My profil </h3>
+            <div th:object="${user}">
+                <table class="dc_table_s1" cellspacing="0" summary="CPU Comparison" style="width:100%;">
+
+                    <tr>
+
+                        <th scope="col" abbr="Xeon E5-2687W">First Name</th>
+                        <th scope="col" abbr="Opteron 6274">Last Name</th>
+                        <th scope="col" >Email</th>
+                        <th scope="col" >Biography</th>
+                        <th scope="col" >Action</th>
+
+                    </tr>
+                    <tr >
+
+                        <td th:text="${user.firstName}"></td>
+                        <td th:text="${user.lastName}"></td>
+                        <td th:text="${user.emailAdresse}"></td>
+                        <td th:text="${user.biography}"></td>
+                        <td><a th:href="${'/user/deleteprofil'}">Delete</a></td>
+
+                    </tr>
+
+                </table>
+            </div>
+        </div>
+        </div>
+
+</section>
+
+
+
+
+
+
+
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script type="text/javascript" src="js/jquery.min.js"   th:src="@{/js/jquery.min.js}"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="js/bootstrap.min.js"    th:src="@{/js/bootstrap.min.js}"></script>
+<script type="text/javascript">
+
+    $('.carousel').carousel({
+        interval: 3500, // in milliseconds
+        pause: 'none' // set to 'true' to pause slider on mouse hover
+    })
+
+</script>
+<script type="text/javascript">
+    $( "a.submenu" ).click(function() {
+        $( ".menuBar" ).slideToggle( "normal", function() {
+// Animation complete.
+        });
+    });
+    $( "ul li.dropdown a" ).click(function() {
+        $( "ul li.dropdown ul" ).slideToggle( "normal", function() {
+// Animation complete.
+        });
+        $('ul li.dropdown').toggleClass('current');
+    });
+</script>
+</body>
+</html>
