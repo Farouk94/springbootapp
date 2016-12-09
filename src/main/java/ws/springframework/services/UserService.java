@@ -37,6 +37,6 @@ public interface UserService {
 
     public Collection<User> findByFirstNameAndLastName(String firstName, String lastName);
 
-    public Integer getOwnerOftheComment(Integer commentId);
+
 
 }

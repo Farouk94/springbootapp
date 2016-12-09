@@ -13,7 +13,6 @@ public interface CommentsRepository extends CrudRepository<Comment, Integer> {
     public Comment findByComment(String name);
 
 
-    @Query(value = "SELECT user_id FROM user_comments where comments_id =?1", nativeQuery = true)
-    public Integer getOwnerOftheComment(Integer commentId);
+
 
 }

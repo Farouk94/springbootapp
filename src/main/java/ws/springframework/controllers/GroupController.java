@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * Created by farou_000 on 29/10/2016.
  */
-
+// ne pas toucher aussi
 @RestController
 //@Secured(value={"ROLE_Admin"}) a implementer apres
 

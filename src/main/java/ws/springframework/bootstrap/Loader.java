@@ -169,24 +169,13 @@ public class Loader implements ApplicationListener<ContextRefreshedEvent> {
         userService.addCommentToUser(user1,comment);
         userService.addCommentToUser(user1,comment1);
 
-       /* userService.addCommentToUser(user2,comment);
-        userService.addCommentToUser(user2,comment1);
 
-        userService.addCommentToUser(user3,comment);
-        userService.addCommentToUser(user3,comment1);*/
 
 
         log.info("add comment to group");
        groupService.addCommentToDashboard(group,comment);
         groupService.addCommentToDashboard(group,comment1);
-       /*groupService.addCommentToDashboard(group1,comment);
-        groupService.addCommentToDashboard(group1,comment1);
 
-        groupService.addCommentToDashboard(group2,comment);
-        groupService.addCommentToDashboard(group2,comment1);
-*/
-
-    //    log.info("Count of users in the group " + groupRepository.findByName(group.getName()).getGroupMembers().size());
 
 
     }

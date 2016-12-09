@@ -146,6 +146,6 @@ adding_comment.setOwnerfirstName(adding_user.getFirstName());
         return userRepository.findByFirstNameAndLastName(firstName, lastName);
     }
 
-    public Integer getOwnerOftheComment(Integer commentId){return commentsRepository.getOwnerOftheComment(commentId);}
+
 
 }

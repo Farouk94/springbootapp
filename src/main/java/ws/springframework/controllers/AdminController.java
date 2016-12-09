@@ -15,7 +15,7 @@ import java.util.Collection;
 /**
  * Created by farou_000 on 31/10/2016.
  */
-
+//ne pas toucher n'est pas inclus dans le projet c'est pour faire un truk plus tard
 @RestController
 public class AdminController {
     private GroupService groupService;
