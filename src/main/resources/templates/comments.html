@@ -1,14 +1,20 @@
-<!DOCTYPE html>
-<html      xmlns:th="http://www.thymeleaf.org">
+<!doctype html>
+<html lang="en-US" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Web Services Project</title>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+    <title>Comments </title>
+
+    <link rel="stylesheet" type="text/css" href="styles.css" th:href="@{/css/styles.css}"/>
+    <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Wellfleet" th:href="@{http://fonts.googleapis.com/css?family=Wellfleet}"/>
+    <!--[if lt IE 9]>
+    <script type="text/javascript" th:src="@{http://html5shiv.googlecode.com/svn/trunk/html5.js}" src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <!-- Bootstrap -->
-    <link href="css/bootstrap.min.css" rel="stylesheet"   th:href="@{/css/bootstrap.min.css}"/>
-    <link href='http://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900'  th:href="@{http://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900}"
-          rel='stylesheet' type='text/css'/>
-    <link href="/css/style.css" rel="stylesheet"  th:href="@{/css/style.css}"/>
-    <link rel="stylesheet" type="text/css" href="../static/shortcodes/shortcodes.css"   th:href="@{/shortcodes/shortcodes.css}" />
+    <link href="/css/bootstrap.min.css" rel="stylesheet"   th:href="@{/css/bootstrap.min.css}"/>
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900' rel='stylesheet' type='text/css' th:href="@{http://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900}" />
+    <link href="/css/style.css" rel="stylesheet"   th:href="@{/css/style.css}" />
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -18,6 +24,7 @@
             th:src="@{https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js}"></script>
     <![endif]-->
 </head>
+
 <body>
 <header class="main__header">
     <div class="container">
@@ -62,47 +69,45 @@
 
 <section class="main__middle__container">
     <div class="titler blog text-center">
+        <div th:object="${commentedgroup}">
         <div class="seper"></div>
-        <h2 class="page__title">View all  users</h2>
+        <h2 class="page__title">
+            <td th:text= "${'Comments of '+commentedgroup.name}"></td>
+        </h2>
         <div class="seper"></div>
     </div>
-    <div class="container">
-        <div class="row no_padding title__block nothing no-margin">
-            <div th:if="${not #lists.isEmpty(users)}">
-
-                <h3>Users  </h3>
-                <table class="dc_table_s1" cellspacing="0" summary="CPU Comparison" style="width:100%;">
-                    <caption>
-
-                    </caption>
-                    <tr>
-
-                        <th scope="col" abbr="Xeon E5-2687W">First name</th>
-                        <th scope="col" abbr="Opteron 6274">Last name</th>
-                        <th scope="col" >Email</th>
-                        <th scope="col" >Biography</th>
-
-
-                    </tr>
-                    <tr th:each="user : ${users}">
-
-
-                            <td th:text="${user.firstName}"></td>
-                            <td th:text="${user.lastName}"></td>
-                        <td th:text="${user.emailAdresse}"></td>
-                            <td th:text="${user.biography}"></td>
-
-
-
-
-
-                    </tr>
-
-                </table>
-            </div>
         </div>
 
+        <div class="row no_padding title__block nothing no-margin">
+        <div id="w">
+
+
+        <div id="container">
+<tr th:each="comment : ${comments}">
+
+            <ul id="comments">
+
+                <li class="cmmnt">
+
+                    <div class="avatar"><a ><img src="images/default.png" th:src="@{/images/default.png}" width="55" height="55" alt="default avatar"/></a></div>
+                    <div class="cmmnt-content">
+
+                        <a href="javascript:void(0);" class="userlink"><td th:text="   |${comment.OwnerfirstName}   ${comment.OwnerLastName}|"></td></a>
+
+                        <p><td th:text="${comment.comment}"></td></p>
+
+
+                    </div>
+                </li>
+
+            </ul>
+            </tr>
+
+
     </div>
+    </div>
+</div>
+
 </section>
 
 
@@ -113,9 +118,9 @@
 
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<script type="text/javascript" src="js/jquery.min.js"   th:src="@{/js/jquery.min.js}"></script>
+<script type="text/javascript" src="../static/js/jquery.min.js" th:src="@{/js/jquery.min.js}"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
-<script src="js/bootstrap.min.js"    th:src="@{/js/bootstrap.min.js}"></script>
+<script src="../static/js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>
 <script type="text/javascript">
 
     $('.carousel').carousel({
@@ -137,5 +142,6 @@
         $('ul li.dropdown').toggleClass('current');
     });
 </script>
+
 </body>
 </html>

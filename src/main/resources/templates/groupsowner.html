@@ -87,6 +87,7 @@
             <th scope="col" abbr="Opteron 6274">Membership count</th>
             <th scope="col" abbr="Opteron 6274">Actions</th>
             <th scope="col" abbr="Opteron 6274">Members</th>
+            <th scope="col" abbr="Opteron 6274">Comments</th>
 
            
 
@@ -101,6 +102,8 @@
               <td><a th:href="${'/user/deletegroup/'+mygroup.Id}">Delete</a>
                   <a th:href="${'/editgroup/'+mygroup.Id}">   Edit</a></td>
               <td><a th:href="${'/memberlist/'+mygroup.Id}">View</a></td>
+              <td><a th:href="${'/comments/'+mygroup.Id}">View</a>
+                  <a th:href="${'//'+mygroup.Id}">  Comment</a></td>
 
           </tr>
 
@@ -118,6 +121,7 @@
                     <th scope="col" abbr="Opteron 6274">Membership count</th>
                     <th scope="col" abbr="Opteron 6274">Action</th>
                     <th scope="col" abbr="Opteron 6274">Members</th>
+                    <th scope="col" abbr="Opteron 6274">Comments</th>
 
 
 
@@ -134,6 +138,9 @@
 
                     </td>
                     <td><a th:href="${'/memberlist/'+partgroup.Id}">View</a></td>
+                    <td><a th:href="${'/comments/'+partgroup.Id}">View</a>
+                        <a th:href="${'//'+partgroup.Id}">  Comment</a></td>
+
 
                 </tr>
 
