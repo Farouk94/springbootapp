@@ -1,13 +1,6 @@
 package ws.springframework.services;
 
 
-import ws.springframework.domain.Comment;
-import ws.springframework.domain.Role;
-import ws.springframework.domain.User;
-import ws.springframework.exceptions.EntityNotFoundException;
-import ws.springframework.repositories.CommentsRepository;
-import ws.springframework.repositories.RoleRepository;
-import ws.springframework.repositories.UserRepository;
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +8,13 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ws.springframework.domain.Comment;
+import ws.springframework.domain.Role;
+import ws.springframework.domain.User;
+import ws.springframework.exceptions.EntityNotFoundException;
+import ws.springframework.repositories.CommentsRepository;
+import ws.springframework.repositories.RoleRepository;
+import ws.springframework.repositories.UserRepository;
 
 import javax.servlet.http.HttpSession;
 import java.util.Collection;
@@ -24,15 +24,13 @@ import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-/**
- * Created by farou_000 on 29/10/2016.
- */
+
 
 @Service
 public class UserServiceImp implements UserService {
     private UserRepository userRepository;
     private RoleRepository roleRepository;
-    private CommentsRepository commentsRepository ;
+    private CommentsRepository commentsRepository;
     private Logger log = Logger.getLogger(UserServiceImp.class);
 
 
@@ -62,7 +60,6 @@ public class UserServiceImp implements UserService {
     }
 
 
-
     @Override
     public User getUserByEmail(String adresse) {
         return userRepository.findByEmailAdresse(adresse);
@@ -79,13 +76,13 @@ public class UserServiceImp implements UserService {
     }
 
     @Override
-    public void   deleteUserByEmail(String adresse) {
+    public void deleteUserByEmail(String adresse) {
         userRepository.deleteByEmailAdresse(adresse);
     }
 
 
     @Override
-    public Boolean ifExist(String adresse ) {
+    public Boolean ifExist(String adresse) {
         return userRepository.existsByName(adresse);
     }
 
@@ -123,7 +120,7 @@ public class UserServiceImp implements UserService {
 
     @Override
     @Transactional
-    public void addCommentToUser(User user , Comment comment) {
+    public void addCommentToUser(User user, Comment comment) {
 
         log.info("Adding comment  " + comment.getComment() + " to user " + user.getEmailAdresse());
         User adding_user = userRepository.findOne(user.getId());
@@ -135,11 +132,11 @@ public class UserServiceImp implements UserService {
         if (adding_comment == null) {
             throw new EntityNotFoundException("Comment");
         }
-adding_comment.setOwnerfirstName(adding_user.getFirstName());
+        adding_comment.setOwnerfirstName(adding_user.getFirstName());
         adding_comment.setOwnerLastName(adding_user.getLastName());
 
         commentsRepository.save(adding_comment);
-        adding_user.getComments().add(adding_comment) ;
+        adding_user.getComments().add(adding_comment);
         userRepository.save(adding_user);
 
     }
@@ -149,17 +146,17 @@ adding_comment.setOwnerfirstName(adding_user.getFirstName());
     public Collection<User> findByFirstNameAndLastName(String firstName, String lastName) {
         return userRepository.findByFirstNameAndLastName(firstName, lastName);
     }
-@Override
-    public String getFNofCommentOwner(String adresse){
-        return  userRepository.getFNofCommentOwner(adresse) ;
+
+    @Override
+    public String getFNofCommentOwner(String adresse) {
+        return userRepository.getFNofCommentOwner(adresse);
     }
 
 
-
     @Override
-    public String getLNofCommentOwner(String adresse){
+    public String getLNofCommentOwner(String adresse) {
 
-        return userRepository.getLNofCommentOwner(adresse) ;
+        return userRepository.getLNofCommentOwner(adresse);
 
     }
 

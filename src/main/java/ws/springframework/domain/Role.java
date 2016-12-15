@@ -5,9 +5,6 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import java.io.Serializable;
 
-/**
- * Created by farou_000 on 30/10/2016.
- */
 
 @Entity
 @Table(name = "ROLES")

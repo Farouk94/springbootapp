@@ -32,10 +32,22 @@ public class User implements Serializable {
     @JsonIgnore
     private Collection<Role> roles;
 
-    @OneToMany (fetch = FetchType.EAGER )
+    @OneToMany(fetch = FetchType.EAGER)
     @Fetch(value = FetchMode.SUBSELECT)
     @JoinTable(name = "user_comments")
     private Collection<Comment> comments;
+
+    public User() {
+
+    }
+
+    public User(String emailAdresse, String firstName, String lastName, String biography) {
+        super();
+        this.emailAdresse = emailAdresse;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.biography = biography;
+    }
 
     public Collection<Comment> getComments() {
         return comments;
@@ -51,18 +63,6 @@ public class User implements Serializable {
 
     public void setId(Integer id) {
         Id = id;
-    }
-
-    public User() {
-
-    }
-
-    public User(String emailAdresse, String firstName, String lastName, String biography) {
-        super();
-        this.emailAdresse = emailAdresse;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.biography = biography;
     }
 
     public Boolean getEnabled() {

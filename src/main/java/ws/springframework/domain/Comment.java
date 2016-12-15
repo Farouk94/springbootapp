@@ -7,22 +7,21 @@ import java.io.Serializable;
 
 
 
-
-/**
- * Created by farou_000 on 02/11/2016.
- */
-
 @Entity
 @Table(name = "COMMENTS")
 
-public class Comment implements Serializable{
+public class Comment implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @JsonIgnore
     private Integer Id;
     private String OwnerfirstName;
-    private String OwnerLastName ;
+    private String OwnerLastName;
     private String comment;
+
+    public Comment() {
+
+    }
 
     public String getOwnerfirstName() {
         return OwnerfirstName;
@@ -46,10 +45,6 @@ public class Comment implements Serializable{
 
     public void setId(Integer id) {
         Id = id;
-    }
-
-    public Comment() {
-
     }
 
     public String getComment() {

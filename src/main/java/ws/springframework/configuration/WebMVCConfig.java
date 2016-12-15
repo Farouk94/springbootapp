@@ -1,7 +1,6 @@
 package ws.springframework.configuration;
 
 import com.fasterxml.jackson.core.JsonGenerator;
-
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -18,9 +17,7 @@ import java.io.IOException;
 import java.util.Iterator;
 import java.util.stream.Stream;
 
-/**
- * Created by farou_000 on 30/10/2016.
- */
+
 @Configuration
 public class WebMVCConfig extends WebMvcConfigurerAdapter {
 
@@ -42,8 +39,6 @@ public class WebMVCConfig extends WebMvcConfigurerAdapter {
         registry.addViewController("/commentcreate").setViewName("commentcreate");
 
 
-
-
     }
 
     @Bean(name = "dataSource")
@@ -59,7 +54,7 @@ public class WebMVCConfig extends WebMvcConfigurerAdapter {
     @Bean
     public MappingJackson2HttpMessageConverter mappingJackson2HttpMessageConverter() {
         MappingJackson2HttpMessageConverter jsonConverter = new MappingJackson2HttpMessageConverter();
-        ObjectMapper objectMapper =jsonConverter.getObjectMapper();
+        ObjectMapper objectMapper = jsonConverter.getObjectMapper();
         SimpleModule module = new SimpleModule("Stream");
         module.addSerializer(Stream.class, new JsonSerializer<Stream>() {
 

@@ -7,9 +7,7 @@ import ws.springframework.domain.User;
 import java.util.Collection;
 import java.util.stream.Stream;
 
-/**
- * Created by farou_000 on 29/10/2016.
- */
+
 public interface GroupService {
     Collection<Group> listAllGroups();
 
@@ -33,8 +31,8 @@ public interface GroupService {
 
     public Comment getCommentByName(String name);
 
-    public Collection<Group> getGroupByAdminEmail(String email) ;
+    public Collection<Group> getGroupByAdminEmail(String email);
 
-    public Comment getCommentById(Integer id) ;
+    public Comment getCommentById(Integer id);
 
 }

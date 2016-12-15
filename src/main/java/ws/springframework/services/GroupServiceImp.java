@@ -1,5 +1,9 @@
 package ws.springframework.services;
 
+import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ws.springframework.domain.Comment;
 import ws.springframework.domain.Group;
 import ws.springframework.domain.User;
@@ -7,10 +11,6 @@ import ws.springframework.exceptions.EntityNotFoundException;
 import ws.springframework.repositories.CommentsRepository;
 import ws.springframework.repositories.GroupRepository;
 import ws.springframework.repositories.UserRepository;
-import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collection;
 import java.util.stream.Stream;
@@ -53,7 +53,9 @@ public class GroupServiceImp implements GroupService {
     }
 
     @Override
-    public  Group getGroupById(Integer id){ return groupRepository.findOne(id) ; }
+    public Group getGroupById(Integer id) {
+        return groupRepository.findOne(id);
+    }
 
     @Override
     public Group saveGroup(Group group) {
@@ -135,12 +137,16 @@ public class GroupServiceImp implements GroupService {
     public Comment getCommentByName(String name) {
         return commentsRepository.findByComment(name);
     }
-@Override
-    public Collection<Group> getGroupByAdminEmail(String email){
 
-    return groupRepository.findByAdminEmail(email) ;
+    @Override
+    public Collection<Group> getGroupByAdminEmail(String email) {
 
-}
-@Override
-    public Comment getCommentById(Integer id){ return  commentsRepository.findOne(id);}
+        return groupRepository.findByAdminEmail(email);
+
+    }
+
+    @Override
+    public Comment getCommentById(Integer id) {
+        return commentsRepository.findOne(id);
+    }
 }

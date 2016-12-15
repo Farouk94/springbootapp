@@ -2,9 +2,6 @@ package ws.springframework.forms;
 
 import java.io.Serializable;
 
-/**
- * Created by farou_000 on 01/11/2016.
- */
 public class GroupForm implements Serializable {
 
 

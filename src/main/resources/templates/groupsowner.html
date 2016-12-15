@@ -1,23 +1,25 @@
 <!DOCTYPE html>
-<html  xmlns="http://www.w3.org/1999/xhtml"
-       xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<title>My groups</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<!-- Bootstrap -->
-<link href="css/bootstrap.min.css" rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
-<link href='http://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900'  th:href="@{http://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900}" rel='stylesheet' type='text/css'/>
-<link href="css/style.css"    th:href="@{/css/style.css}" rel="stylesheet"/>
-<link rel="stylesheet" type="text/css" href="shortcodes/shortcodes.css"  th:href="@{/shortcodes/shortcodes.css}" />
-<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-<!--[if lt IE 9]>
-          <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"
-                  th:src="@{https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js}"></script>
-          <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"
+    <title>My groups</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900'
+          th:href="@{http://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900}" rel='stylesheet'
+          type='text/css'/>
+    <link href="css/style.css" th:href="@{/css/style.css}" rel="stylesheet"/>
+    <link rel="stylesheet" type="text/css" href="shortcodes/shortcodes.css" th:href="@{/shortcodes/shortcodes.css}"/>
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"
+            th:src="@{https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js}"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"
 
-                  th:src="@{https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js}"></script>
-        <![endif]-->
+            th:src="@{https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js}"></script>
+    <![endif]-->
 </head>
 <body>
 <header class="main__header">
@@ -27,166 +29,163 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="menuBar">
                 <ul class="menu">
-                    <li ><a href="index.html"   th:href="@{/index}">Home</a></li>
+                    <li><a href="index.html" th:href="@{/index}">Home</a></li>
                     <li class="dropdown">
 
 
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"> <span class="glyphicon glyphicon-user"></span> My profil</a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                            <span class="glyphicon glyphicon-user"></span> My profil</a>
                         <ul>
-                            <li >
-                                <a href="profil.html" th:href="@{/profil}" >See my profile <span class="glyphicon glyphicon-user" ></span></a>
+                            <li>
+                                <a href="profil.html" th:href="@{/profil}">See my profile <span
+                                        class="glyphicon glyphicon-user"></span></a>
 
                             </li>
-                            <li><a href="editprofil.html" th:href="@{/edit/profil}">Edit my profile <span class="glyphicon glyphicon-pencil"></span></a></li>
+                            <li><a href="editprofil.html" th:href="@{/edit/profil}">Edit my profile <span
+                                    class="glyphicon glyphicon-pencil"></span></a></li>
                             <li>
-                                <a href="groupsowner.html" th:href="@{/mygroups}" >My groups <span class="glyphicon glyphicon-user" style="font-size:18px;"></span><span class="glyphicon glyphicon-user"></span></a>
+                                <a href="groupsowner.html" th:href="@{/mygroups}">My groups <span
+                                        class="glyphicon glyphicon-user" style="font-size:18px;"></span><span
+                                        class="glyphicon glyphicon-user"></span></a>
 
                             </li>
                             <li>
-                                <a href="login.html" th:href="@{/login}" >Log out <span class="glyphicon glyphicon-user" style="font-size:18px;"></span></a>
+                                <a href="login.html" th:href="@{/login}">Log out <span class="glyphicon glyphicon-user"
+                                                                                       style="font-size:18px;"></span></a>
 
                             </li>
                         </ul>
-                    <li ><a href="users.html" th:href="@{/otherusers}">Other users</a></li>
+                    <li><a href="users.html" th:href="@{/otherusers}">Other users</a></li>
                     </li>
-                    <li><a href="left_sidebar.html" ></a> </li>
+                    <li><a href="left_sidebar.html"></a></li>
                 </ul>
                 <ul class="menu m_right">
-                    <li ><a href="editgroup.html" th:href="@{/creategroup}">Create group </a></li>
-                    <li ><a href="groupsshow.html" th:href="@{/groups}">View all groups</a></li>
+                    <li><a href="editgroup.html" th:href="@{/creategroup}">Create group </a></li>
+                    <li><a href="groupsshow.html" th:href="@{/groups}">View all groups</a></li>
 
                 </ul>
             </div>
             <div class="navbar-header">
                 <h1 class="navbar-brand"><a href="index.html" th:href="@{/index}">WS TSE </a></h1>
-                <a href="#" onClick="javascript.void()" class="submenu">Menus</a> </div>
+                <a href="#" onClick="javascript.void()" class="submenu">Menus</a></div>
             <!-- /.navbar-collapse -->
         </nav>
     </div>
 </header>
 
 <section class="main__middle__container">
-  <div class="titler blog text-center">
-    <div class="seper"></div>
-    <h2 class="page__title">My groups</h2>
-    <div class="seper"></div>
-  </div>
+    <div class="titler blog text-center">
+        <div class="seper"></div>
+        <h2 class="page__title">My groups</h2>
+        <div class="seper"></div>
+    </div>
 
-  <div class="container">
-
-
-    <div class="row no_padding title__block nothing no-margin">
-        <div th:if="${not #lists.isEmpty(mygroups)}">
-
-            <h3>Groups I own :</h3>
-       
-      <table class="dc_table_s1" cellspacing="0" summary="CPU Comparison" style="width:100%;">
-        <caption>
-       
-        </caption>
-        <tr>
-          <th scope="col" abbr="Specs" class="nobg" ></th>
-          <th scope="col" abbr="Xeon E5-2687W">Name</th>
-          <th scope="col" abbr="Opteron 6274">Description</th>
-            <th scope="col" abbr="Opteron 6274">Membership count</th>
-            <th scope="col" abbr="Opteron 6274">Actions</th>
-            <th scope="col" abbr="Opteron 6274">Members</th>
-            <th scope="col" abbr="Opteron 6274">Comments</th>
-
-           
+    <div class="container">
 
 
-        </tr>
+        <div class="row no_padding title__block nothing no-margin">
+            <div th:if="${not #lists.isEmpty(mygroups)}">
 
-          <tr th:each="mygroup : ${mygroups}">
-              <th scope="row" abbr="Speed" class="specalt"  th:text="${mygroup.Id}"></th>
-              <td th:text="${mygroup.name}"></td>
-              <td th:text="${mygroup.description}"></td>
-              <td th:text="${mygroup.groupMembers.size()}"></td>
-              <td><a th:href="${'/user/deletegroup/'+mygroup.Id}">Delete</a>
-                  <a th:href="${'/editgroup/'+mygroup.Id}">   Edit</a></td>
-              <td><a th:href="${'/memberlist/'+mygroup.Id}">View</a></td>
-              <td><a th:href="${'/comments/'+mygroup.Id}">View</a>
-                  <a th:href="${'/docomment/'+mygroup.Id}">  Comment</a></td>
+                <h3>Groups I own :</h3>
 
-          </tr>
+                <table class="dc_table_s1" cellspacing="0" summary="CPU Comparison" style="width:100%;">
+                    <caption>
 
-
-</table>
-
-            <h3>Groups I'm part of : </h3>
-
-            <table class="dc_table_s1" cellspacing="0" summary="CPU Comparison" style="width:100%;">
-
-                <tr>
-                    <th scope="col" abbr="Specs" class="nobg" ></th>
-                    <th scope="col" abbr="Xeon E5-2687W">Name</th>
-                    <th scope="col" abbr="Opteron 6274">Description</th>
-                    <th scope="col" abbr="Opteron 6274">Membership count</th>
-                    <th scope="col" abbr="Opteron 6274">Action</th>
-                    <th scope="col" abbr="Opteron 6274">Members</th>
-                    <th scope="col" abbr="Opteron 6274">Comments</th>
+                    </caption>
+                    <tr>
+                        <th scope="col" abbr="Specs" class="nobg"></th>
+                        <th scope="col" abbr="Xeon E5-2687W">Name</th>
+                        <th scope="col" abbr="Opteron 6274">Description</th>
+                        <th scope="col" abbr="Opteron 6274">Membership count</th>
+                        <th scope="col" abbr="Opteron 6274">Actions</th>
+                        <th scope="col" abbr="Opteron 6274">Members</th>
+                        <th scope="col" abbr="Opteron 6274">Comments</th>
 
 
+                    </tr>
+
+                    <tr th:each="mygroup : ${mygroups}">
+                        <th scope="row" abbr="Speed" class="specalt" th:text="${mygroup.Id}"></th>
+                        <td th:text="${mygroup.name}"></td>
+                        <td th:text="${mygroup.description}"></td>
+                        <td th:text="${mygroup.groupMembers.size()}"></td>
+                        <td><a th:href="${'/user/deletegroup/'+mygroup.Id}">Delete</a>
+                            <a th:href="${'/editgroup/'+mygroup.Id}"> Edit</a></td>
+                        <td><a th:href="${'/memberlist/'+mygroup.Id}">View</a></td>
+                        <td><a th:href="${'/comments/'+mygroup.Id}">View</a>
+                            <a th:href="${'/docomment/'+mygroup.Id}"> Comment</a></td>
+
+                    </tr>
 
 
-                </tr>
+                </table>
 
-                <tr th:each="partgroup : ${partgroups}">
-                    <th scope="row" abbr="Speed" class="specalt"  th:text="${partgroup.Id}"></th>
-                    <td th:text="${partgroup.name}"></td>
-                    <td th:text="${partgroup.description}"></td>
-                    <td th:text="${partgroup.groupMembers.size()}"></td>
-                    <td>
-                        <a th:href="${'/leavegroup/'+partgroup.Id}">Leave</a>
+                <h3>Groups I'm part of : </h3>
 
-                    </td>
-                    <td><a th:href="${'/memberlist/'+partgroup.Id}">View</a></td>
-                    <td><a th:href="${'/comments/'+partgroup.Id}">View</a>
-                        <a th:href="${'/docomment/'+partgroup.Id}">  Comment</a></td>
+                <table class="dc_table_s1" cellspacing="0" summary="CPU Comparison" style="width:100%;">
 
-
-                </tr>
+                    <tr>
+                        <th scope="col" abbr="Specs" class="nobg"></th>
+                        <th scope="col" abbr="Xeon E5-2687W">Name</th>
+                        <th scope="col" abbr="Opteron 6274">Description</th>
+                        <th scope="col" abbr="Opteron 6274">Membership count</th>
+                        <th scope="col" abbr="Opteron 6274">Action</th>
+                        <th scope="col" abbr="Opteron 6274">Members</th>
+                        <th scope="col" abbr="Opteron 6274">Comments</th>
 
 
-            </table>
+                    </tr>
 
-</div>
-</div>
-  </div>
+                    <tr th:each="partgroup : ${partgroups}">
+                        <th scope="row" abbr="Speed" class="specalt" th:text="${partgroup.Id}"></th>
+                        <td th:text="${partgroup.name}"></td>
+                        <td th:text="${partgroup.description}"></td>
+                        <td th:text="${partgroup.groupMembers.size()}"></td>
+                        <td>
+                            <a th:href="${'/leavegroup/'+partgroup.Id}">Leave</a>
+
+                        </td>
+                        <td><a th:href="${'/memberlist/'+partgroup.Id}">View</a></td>
+                        <td><a th:href="${'/comments/'+partgroup.Id}">View</a>
+                            <a th:href="${'/docomment/'+partgroup.Id}"> Comment</a></td>
+
+
+                    </tr>
+
+
+                </table>
+
+            </div>
+        </div>
+    </div>
 </section>
 
 
-
-
-  
-
-
-<!-- jQuery (necessary for Bootstrap's JavaScript plugins) --> 
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script type="text/javascript" src="js/jquery.min.js"
         th:src="@{/js/jquery.min.js}"></script>
-<!-- Include all compiled plugins (below), or include individual files as needed --> 
+<!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>
 <script type="text/javascript">
 
-$('.carousel').carousel({
-  interval: 3500, // in milliseconds
-  pause: 'none' // set to 'true' to pause slider on mouse hover
-})
+    $('.carousel').carousel({
+        interval: 3500, // in milliseconds
+        pause: 'none' // set to 'true' to pause slider on mouse hover
+    })
 
 </script>
 <script type="text/javascript">
-$( "a.submenu" ).click(function() {
-$( ".menuBar" ).slideToggle( "normal", function() {
+    $("a.submenu").click(function () {
+        $(".menuBar").slideToggle("normal", function () {
 // Animation complete.
-});
-});
-$( "ul li.dropdown a" ).click(function() {
-$( "ul li.dropdown ul" ).slideToggle( "normal", function() {
+        });
+    });
+    $("ul li.dropdown a").click(function () {
+        $("ul li.dropdown ul").slideToggle("normal", function () {
 // Animation complete.
-});
-$('ul li.dropdown').toggleClass('current');
-});
+        });
+        $('ul li.dropdown').toggleClass('current');
+    });
 </script>
 </body>
 </html>

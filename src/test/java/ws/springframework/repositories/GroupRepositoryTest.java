@@ -1,11 +1,11 @@
 package ws.springframework.repositories;
 
-import ws.springframework.configuration.RepositoryConfiguration;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import ws.springframework.configuration.RepositoryConfiguration;
 
 /**
  * Created by farou_000 on 29/10/2016.

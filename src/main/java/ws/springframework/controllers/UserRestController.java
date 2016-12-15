@@ -1,5 +1,10 @@
 package ws.springframework.controllers;
 
+import org.apache.catalina.servlet4preview.http.HttpServletRequest;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 import ws.springframework.domain.Comment;
 import ws.springframework.domain.Group;
 import ws.springframework.domain.User;
@@ -8,17 +13,10 @@ import ws.springframework.forms.GroupForm;
 import ws.springframework.repositories.CommentsRepository;
 import ws.springframework.services.GroupService;
 import ws.springframework.services.UserService;
-import org.apache.catalina.servlet4preview.http.HttpServletRequest;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
 
-/**
- * Created by farou_000 on 29/10/2016.
- */
+
 
 
 @RestController
@@ -27,7 +25,7 @@ public class UserRestController {
 
     private UserService userService;
     private GroupService groupService;
-    private CommentsRepository commentsRepository ;
+    private CommentsRepository commentsRepository;
 
     @Autowired
     public void setCommentsRepository(CommentsRepository commentsRepository) {
@@ -142,7 +140,6 @@ public class UserRestController {
     //user comments on the dashbord of the group
 
 
-
     //user leaves the group
     @RequestMapping(value = "json/user/group/leave/{name}", method = RequestMethod.GET)
     public Collection<User> leaveGroup(HttpServletRequest httpServletRequest, @RequestParam("name") String name) {
@@ -166,24 +163,22 @@ public class UserRestController {
 
     // user comments on the dashboard of the group
     @RequestMapping(value = "json/comment/{groupName}/{comment}", method = RequestMethod.GET)
-    public Collection<Comment> commentDashBoard(@RequestParam("groupName") String groupName, @RequestParam("comment") String comment , HttpServletRequest httpServletRequest) {
+    public Collection<Comment> commentDashBoard(@RequestParam("groupName") String groupName, @RequestParam("comment") String comment, HttpServletRequest httpServletRequest) {
 
 
-
-        String email = userService.getLoggedUser(httpServletRequest).get("username").toString() ;
+        String email = userService.getLoggedUser(httpServletRequest).get("username").toString();
         Comment comment1 = new Comment();
 
         comment1.setComment(comment);
         comment1.setOwnerfirstName(userService.getFNofCommentOwner(email));
         comment1.setOwnerLastName(userService.getLNofCommentOwner(email));
-        commentsRepository.save(comment1) ;
+        commentsRepository.save(comment1);
 
 
+        userService.addCommentToUser((userService.getUserByEmail(email)), comment1);
 
-        userService.addCommentToUser((userService.getUserByEmail(email)),comment1);
-
-        groupService.addCommentToDashboard(groupService.getGroupByName(groupName) , comment1);
-                return  groupService.getGroupByName(groupName).getDiscutionBoard();
+        groupService.addCommentToDashboard(groupService.getGroupByName(groupName), comment1);
+        return groupService.getGroupByName(groupName).getDiscutionBoard();
     }
 
 

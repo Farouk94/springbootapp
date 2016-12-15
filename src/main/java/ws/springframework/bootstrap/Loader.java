@@ -1,5 +1,10 @@
 package ws.springframework.bootstrap;
 
+import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationListener;
+import org.springframework.context.event.ContextRefreshedEvent;
+import org.springframework.stereotype.Component;
 import ws.springframework.domain.Comment;
 import ws.springframework.domain.Group;
 import ws.springframework.domain.Role;
@@ -10,22 +15,15 @@ import ws.springframework.repositories.RoleRepository;
 import ws.springframework.repositories.UserRepository;
 import ws.springframework.services.GroupService;
 import ws.springframework.services.UserService;
-import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationListener;
-import org.springframework.context.event.ContextRefreshedEvent;
-import org.springframework.stereotype.Component;
 
-/**
- * Created by farou_000 on 29/10/2016.
- */
+
 
 @Component
 public class Loader implements ApplicationListener<ContextRefreshedEvent> {
     private GroupRepository groupRepository;
     private UserRepository userRepository;
     private RoleRepository roleRepository;
-    private CommentsRepository commentsRepository ;
+    private CommentsRepository commentsRepository;
     private GroupService groupService;
     private UserService userService;
     private Logger log = Logger.getLogger(Loader.class);
@@ -34,22 +32,27 @@ public class Loader implements ApplicationListener<ContextRefreshedEvent> {
     public void setGroupRepository(GroupRepository groupRepository) {
         this.groupRepository = groupRepository;
     }
+
     @Autowired
     public void setUserRepository(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
+
     @Autowired
     public void setRoleRepository(RoleRepository roleRepository) {
         this.roleRepository = roleRepository;
     }
+
     @Autowired
     public void setCommentsRepository(CommentsRepository commentsRepository) {
         this.commentsRepository = commentsRepository;
     }
+
     @Autowired
     public void setGroupService(GroupService groupService) {
         this.groupService = groupService;
     }
+
     @Autowired
     public void setUserService(UserService userService) {
         this.userService = userService;
@@ -59,7 +62,7 @@ public class Loader implements ApplicationListener<ContextRefreshedEvent> {
     public void onApplicationEvent(ContextRefreshedEvent event) {
 
 
-     //groups
+        //groups
 
         Group group = new Group();
         group.setName("Manchester United Lovers");
@@ -136,17 +139,15 @@ public class Loader implements ApplicationListener<ContextRefreshedEvent> {
         log.info("Saved user- email: " + user3.getEmailAdresse());
 
 
-
         //Comments
-           Comment comment = new Comment() ;
+        Comment comment = new Comment();
         comment.setComment(" Heeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeey");
         log.info("Saved comment- id: " + comment.getComment());
         commentsRepository.save(comment);
-        Comment comment1 = new Comment() ;
+        Comment comment1 = new Comment();
         comment1.setComment("I love this group");
         log.info("Saved comment- id: " + comment1.getComment());
         commentsRepository.save(comment1);
-
 
 
         log.info("add user to group ");
@@ -158,7 +159,6 @@ public class Loader implements ApplicationListener<ContextRefreshedEvent> {
         groupService.addUserToGroup(group3, user3);
 
 
-
         log.info("add role to user");
         userService.addRoleToUser(user1, role);
         userService.addRoleToUser(user2, role);
@@ -166,16 +166,13 @@ public class Loader implements ApplicationListener<ContextRefreshedEvent> {
 
 
         log.info("add comment to user");
-        userService.addCommentToUser(user1,comment);
-        userService.addCommentToUser(user1,comment1);
-
-
+        userService.addCommentToUser(user1, comment);
+        userService.addCommentToUser(user1, comment1);
 
 
         log.info("add comment to group");
-       groupService.addCommentToDashboard(group,comment);
-        groupService.addCommentToDashboard(group,comment1);
-
+        groupService.addCommentToDashboard(group, comment);
+        groupService.addCommentToDashboard(group, comment1);
 
 
     }
