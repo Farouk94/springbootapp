@@ -121,7 +121,8 @@ public class UserServiceImp implements UserService {
 
     }
 
-
+    @Override
+    @Transactional
     public void addCommentToUser(User user , Comment comment) {
 
         log.info("Adding comment  " + comment.getComment() + " to user " + user.getEmailAdresse());
@@ -142,10 +143,24 @@ adding_comment.setOwnerfirstName(adding_user.getFirstName());
         userRepository.save(adding_user);
 
     }
+
+    @Override
+
     public Collection<User> findByFirstNameAndLastName(String firstName, String lastName) {
         return userRepository.findByFirstNameAndLastName(firstName, lastName);
     }
+@Override
+    public String getFNofCommentOwner(String adresse){
+        return  userRepository.getFNofCommentOwner(adresse) ;
+    }
 
 
+
+    @Override
+    public String getLNofCommentOwner(String adresse){
+
+        return userRepository.getLNofCommentOwner(adresse) ;
+
+    }
 
 }

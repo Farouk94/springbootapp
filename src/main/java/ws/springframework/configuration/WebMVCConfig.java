@@ -37,7 +37,10 @@ public class WebMVCConfig extends WebMvcConfigurerAdapter {
         registry.addViewController("/creategroup").setViewName("creategroup");
         registry.addViewController("/users").setViewName("users");
         registry.addViewController("/index").setViewName("index");
+        registry.addViewController("/").setViewName("index");
         registry.addViewController("/comments").setViewName("comments");
+        registry.addViewController("/commentcreate").setViewName("commentcreate");
+
 
 
 

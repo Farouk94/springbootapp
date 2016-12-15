@@ -32,10 +32,12 @@ public class UserController {
 
     private UserService userService;
     private GroupService groupService;
+    private  CommentsRepository commentsRepository ;
 
-
-
-
+@Autowired
+    public void setCommentsRepository(CommentsRepository commentsRepository) {
+        this.commentsRepository = commentsRepository;
+    }
 
     @Autowired
 
@@ -48,7 +50,7 @@ public class UserController {
         this.userService = userService;
     }
 
-
+//list all groups
     @RequestMapping(value = "groups", method = RequestMethod.GET)
     public String list(Model model, HttpServletRequest httpServletRequest) {
         model.addAttribute("groups", groupService.listAllGroups());
@@ -56,13 +58,15 @@ public class UserController {
         return "groupsshow";
     }
 
+
+    //edit the profil
     @RequestMapping(value = "edit/profil", method = RequestMethod.GET)
     public String setProfilform(HttpServletRequest httpServletRequest, Model model) {
         model.addAttribute("user", userService.getUserByEmail(userService.getLoggedUser(httpServletRequest).get("username").toString()));
 
         return "editprofil";
     }
-
+//edit the profil
     @RequestMapping(value = "editedprofil", method = RequestMethod.POST)
     public String setProfilSubmit(User user, HttpServletRequest httpServletRequest, Model model) {
         User user1 = userService.getUserByEmail(userService.getLoggedUser(httpServletRequest).get("username").toString());
@@ -75,13 +79,15 @@ public class UserController {
         return "redirect:/profil";
     }
 
+
+    // show the profil
     @RequestMapping("profil")
     public String showProfil(HttpServletRequest httpServletRequest, Model model) {
         model.addAttribute("user", userService.getUserByEmail(userService.getLoggedUser(httpServletRequest).get("username").toString()));
         return "profil";
     }
 
-
+// show member list of  a specific group
     @RequestMapping(value = "memberlist/{id}", method = RequestMethod.GET)
     public String showmemberlist(@PathVariable Integer id, Model model) {
         model.addAttribute("group", groupService.getGroupById(id));
@@ -90,6 +96,7 @@ public class UserController {
         return "memberlist";
     }
 
+    // show groups that user art part of and he owns
     @RequestMapping(value = "mygroups", method = RequestMethod.GET)
     public String mygroups(HttpServletRequest httpServletRequest, Model model) {
         Collection<Group> partGroups = new HashSet();
@@ -105,7 +112,7 @@ public class UserController {
 
         return "groupsowner";
     }
-
+// delete the profil of the user
     @Transactional
     //user deletes his/her account
     @RequestMapping(value = "user/deleteprofil", method = RequestMethod.GET)
@@ -119,7 +126,7 @@ public class UserController {
 
         return "redirect:/login";
     }
-
+// leave  a group
     @Transactional
     @RequestMapping(value = "leavegroup/{id}", method = RequestMethod.GET)
     public String leavegroup(@PathVariable Integer id, HttpServletRequest httpServletRequest) {
@@ -130,7 +137,7 @@ public class UserController {
         return "redirect:/mygroups";
     }
 
-
+//delete a group
     @Transactional
     //user deletes his/her group
     @RequestMapping(value = "user/deletegroup/{id}", method = RequestMethod.GET)
@@ -149,7 +156,7 @@ public class UserController {
 
 
     @Transactional
-    //user deletes his/her group
+    //user join a group
     @RequestMapping(value = "join/{id}", method = RequestMethod.GET)
     public String joingroup(@PathVariable Integer id, HttpServletRequest httpServletRequest) {
 
@@ -159,9 +166,9 @@ public class UserController {
 
         return "redirect:/groups";
     }
-
+//user edit information about the group he owns
     @Transactional
-    //user deletes his/her group
+
     @RequestMapping(value = "editgroup/{id}", method = RequestMethod.GET)
     public String editgroup(Model model, @PathVariable Integer id) {
 
@@ -172,7 +179,7 @@ public class UserController {
         return "editgroup";
     }
 
-
+// user edit informations about the group he owns
     @RequestMapping(value = "editedgroup/{id}", method = RequestMethod.POST)
     public String setGroupSubmit(Group group, @PathVariable Integer id , HttpServletRequest httpServletRequest) {
 
@@ -192,27 +199,21 @@ public class UserController {
 
 
     }
-
+ // user create a group
     @RequestMapping(value = "creategroup", method = RequestMethod.GET)
-    public String newGroup(Model model , Group group , HttpServletRequest httpServletRequest) {
+    public String newGroup(Model model ) {
 
-  //     groupService.saveGroup(group);
+
 
       Group group2 =new Group() ;
-        model.addAttribute("newgroup", group2);
+       model.addAttribute("newgroup", group2);
         groupService.saveGroup(group2);
-       /* group2.setAdminEmail(userService.getLoggedUser(httpServletRequest).get("username").toString());
-        group2.setName(group.getName());
-        group2.setDescription(group.getDescription());
-        groupService.saveGroup(group2) ;
-        groupService.addUserToGroup(group2, userService.getUserByEmail(userService.getLoggedUser(httpServletRequest).get("username").toString()));*/
-
 
         return "creategroup";
 
 
     }
-
+// user see other users
 
     @RequestMapping(value = "otherusers", method = RequestMethod.GET)
     public String otherUsers(Model model , HttpServletRequest httpServletRequest) {
@@ -228,7 +229,7 @@ public class UserController {
 
     }
 
-
+//user see comments of a group
     @RequestMapping(value = "comments/{id}", method = RequestMethod.GET)
     public String seecomments(Model model ,@PathVariable Integer id) {
         Collection<User> users = new HashSet() ;
@@ -237,17 +238,51 @@ public class UserController {
         model.addAttribute("commentedgroup", groupService.getGroupById(id));
         model.addAttribute("comments", groupService.getGroupById(id).getDiscutionBoard());
 
-
-
-
-
-
-
         return "comments";
 
 
     }
 
+    //user comment a group
+    @RequestMapping(value = "docomment/{id}", method = RequestMethod.GET)
+    public String docomments(Model model , @PathVariable Integer id ) {
 
+
+        Comment comment=  new Comment();
+
+        commentsRepository.save(comment) ;
+        model.addAttribute("newcomment" , comment) ;
+        return "commentcreate";
+
+
+    }
+
+
+    @RequestMapping(value = "editedcomment/{id}", method = RequestMethod.POST)
+    public String setCommentSubmit(Comment comment, @PathVariable Integer id , HttpServletRequest httpServletRequest) {
+
+       String email = userService.getLoggedUser(httpServletRequest).get("username").toString() ;
+Comment comment1 = groupService.getCommentById(id) ;
+        System.out.println(comment.getComment());
+       comment1.setComment(comment.getComment());
+        comment1.setOwnerfirstName(userService.getFNofCommentOwner(email));
+        comment1.setOwnerLastName(userService.getLNofCommentOwner(email));
+        commentsRepository.save(comment1) ;
+
+
+
+        userService.addCommentToUser((userService.getUserByEmail(email)),comment1);
+
+     //  groupService.addCommentToDashboard(groupService.getGroupById(id),comment);
+//Problem here how to get the id of the group we selected ?
+
+
+
+
+
+        return "redirect:/comments/{id}";
+
+
+    }
 
 }

@@ -37,6 +37,10 @@ public interface UserService {
 
     public Collection<User> findByFirstNameAndLastName(String firstName, String lastName);
 
+    public String getFNofCommentOwner(String adresse) ;
+
+    public String getLNofCommentOwner(String adresse) ;
+
 
 
 }

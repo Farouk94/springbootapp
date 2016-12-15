@@ -35,4 +35,6 @@ public interface GroupService {
 
     public Collection<Group> getGroupByAdminEmail(String email) ;
 
+    public Comment getCommentById(Integer id) ;
+
 }

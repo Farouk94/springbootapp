@@ -18,8 +18,7 @@
             th:src="@{https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js}"></script>
     <![endif]-->
 </head>
-<body>
-<header class="main__header">
+<body><header class="main__header">
     <div class="container">
         <nav class="navbar navbar-default" role="navigation">
             <!-- Brand and toggle get grouped for better mobile display -->
@@ -39,6 +38,10 @@
                             <li><a href="editprofil.html" th:href="@{/edit/profil}">Edit my profile <span class="glyphicon glyphicon-pencil"></span></a></li>
                             <li>
                                 <a href="groupsowner.html" th:href="@{/mygroups}" >My groups <span class="glyphicon glyphicon-user" style="font-size:18px;"></span><span class="glyphicon glyphicon-user"></span></a>
+
+                            </li>
+                            <li>
+                                <a href="login.html" th:href="@{/login}" >Log out <span class="glyphicon glyphicon-user" style="font-size:18px;"></span></a>
 
                             </li>
                         </ul>

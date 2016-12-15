@@ -141,4 +141,6 @@ public class GroupServiceImp implements GroupService {
     return groupRepository.findByAdminEmail(email) ;
 
 }
+@Override
+    public Comment getCommentById(Integer id){ return  commentsRepository.findOne(id);}
 }

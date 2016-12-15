@@ -42,6 +42,10 @@
                                 <a href="groupsowner.html" th:href="@{/mygroups}" >My groups <span class="glyphicon glyphicon-user" style="font-size:18px;"></span><span class="glyphicon glyphicon-user"></span></a>
 
                             </li>
+                            <li>
+                                <a href="login.html" th:href="@{/login}" >Log out <span class="glyphicon glyphicon-user" style="font-size:18px;"></span></a>
+
+                            </li>
                         </ul>
                     <li ><a href="users.html" th:href="@{/otherusers}">Other users</a></li>
                     </li>
@@ -103,7 +107,7 @@
                   <a th:href="${'/editgroup/'+mygroup.Id}">   Edit</a></td>
               <td><a th:href="${'/memberlist/'+mygroup.Id}">View</a></td>
               <td><a th:href="${'/comments/'+mygroup.Id}">View</a>
-                  <a th:href="${'//'+mygroup.Id}">  Comment</a></td>
+                  <a th:href="${'/docomment/'+mygroup.Id}">  Comment</a></td>
 
           </tr>
 
@@ -139,7 +143,7 @@
                     </td>
                     <td><a th:href="${'/memberlist/'+partgroup.Id}">View</a></td>
                     <td><a th:href="${'/comments/'+partgroup.Id}">View</a>
-                        <a th:href="${'//'+partgroup.Id}">  Comment</a></td>
+                        <a th:href="${'/docomment/'+partgroup.Id}">  Comment</a></td>
 
 
                 </tr>

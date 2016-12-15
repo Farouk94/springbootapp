@@ -17,4 +17,9 @@ public interface UserRepository extends CrudRepository<User, Integer> {
     @Query(value = "select exists(select email_adresse from users where email_adresse=?1)", nativeQuery = true)
     public Boolean existsByName(String adresse);
 
+    @Query(value = "select first_name from users where email_adresse=?1" , nativeQuery = true)
+    public String getFNofCommentOwner(String adresse) ;
+    @Query(value = "select last_name from users where email_adresse=?1" , nativeQuery = true)
+    public String getLNofCommentOwner(String adresse) ;
+
 }

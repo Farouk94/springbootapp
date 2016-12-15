@@ -1,14 +1,13 @@
 <!DOCTYPE html>
-<html      xmlns:th="http://www.thymeleaf.org">
+<html           xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Web Services Project</title>
+    <title>Create group</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <!-- Bootstrap -->
-    <link href="css/bootstrap.min.css" rel="stylesheet"   th:href="@{/css/bootstrap.min.css}"/>
-    <link href='http://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900'  th:href="@{http://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900}"
-          rel='stylesheet' type='text/css'/>
-    <link href="/css/style.css" rel="stylesheet"  th:href="@{/css/style.css}"/>
-    <link rel="stylesheet" type="text/css" href="../static/shortcodes/shortcodes.css"   th:href="@{/shortcodes/shortcodes.css}" />
+    <link href="/css/bootstrap.min.css" rel="stylesheet"   th:href="@{/css/bootstrap.min.css}"/>
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900' rel='stylesheet' type='text/css' th:href="@{http://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900}" />
+    <link href="/css/style.css" rel="stylesheet"   th:href="@{/css/style.css}" />
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -38,9 +37,9 @@
                             </li>
                             <li><a href="editprofil.html" th:href="@{/edit/profil}">Edit my profile <span class="glyphicon glyphicon-pencil"></span></a></li>
                             <li>
-                                <a href="groupsowner.html" th:href="@{/mygroups}" >My groups <span class="glyphicon glyphicon-user" style="font-size:18px;"></span><span class="glyphicon glyphicon-user"></span></a>
+                            <a href="groupsowner.html" th:href="@{/mygroups}" >My groups <span class="glyphicon glyphicon-user" style="font-size:18px;"></span><span class="glyphicon glyphicon-user"></span></a>
 
-                            </li>
+                        </li>
                             <li>
                                 <a href="login.html" th:href="@{/login}" >Log out <span class="glyphicon glyphicon-user" style="font-size:18px;"></span></a>
 
@@ -64,70 +63,43 @@
     </div>
 </header>
 
+
 <section class="main__middle__container">
     <div class="titler blog text-center">
         <div class="seper"></div>
-        <h2 class="page__title">View all  users</h2>
+        <br/>
+
+        <h2 class="page__title">Create Comment</h2>
         <div class="seper"></div>
     </div>
-    <div class="container">
-        <div class="row no_padding title__block nothing no-margin">
-            <div th:if="${not #lists.isEmpty(users)}">
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <div class="container ">
+        <form role="form" id="contact-form" name="contact-form" method="post" action="" class="contact-form"  th:object="${newcomment}"    th:action="@{/editedcomment/} + ${newcomment.Id}">
+            <input type="hidden" th:field="*{Id}"/>
 
-                <h3>Users  </h3>
-                <table class="dc_table_s1" cellspacing="0" summary="CPU Comparison" style="width:100%;">
-                    <caption>
-
-                    </caption>
-                    <tr>
-
-                        <th scope="col" abbr="Xeon E5-2687W">First name</th>
-                        <th scope="col" abbr="Opteron 6274">Last name</th>
-                        <th scope="col" >Email</th>
-                        <th scope="col" >Biography</th>
-
-
-                    </tr>
-                    <tr th:each="user : ${users}">
-
-
-                            <td th:text="${user.firstName}"></td>
-                            <td th:text="${user.lastName}"></td>
-                        <td th:text="${user.emailAdresse}"></td>
-                            <td th:text="${user.biography}"></td>
-
-
-
-
-
-                    </tr>
-
-                </table>
+            <div class="form-group col-md-6">
+                <label class="sr-only" for="exampleInputEmail1">Comment: *</label>
+                <input required="" type="text" class="form-control" id="name" name="name" placeholder="Comment: *"  th:field="*{comment}"/>
             </div>
-        </div>
 
+            <div class="clearfix"></div>
+
+
+            <input id="submit-button" type="submit" class="btn btn-lg btn-info" value="Submit" />
+        </form>
     </div>
 </section>
+<br/>
+<br/>
+<br/>
+<br/>
 
 
-
-
-
-
-
-
-<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<script type="text/javascript" src="js/jquery.min.js"   th:src="@{/js/jquery.min.js}"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
-<script src="js/bootstrap.min.js"    th:src="@{/js/bootstrap.min.js}"></script>
-<script type="text/javascript">
-
-    $('.carousel').carousel({
-        interval: 3500, // in milliseconds
-        pause: 'none' // set to 'true' to pause slider on mouse hover
-    })
-
-</script>
+<script src="js/bootstrap.min.js"   th:src="@{/js/bootstrap.min.js}"></script>
 <script type="text/javascript">
     $( "a.submenu" ).click(function() {
         $( ".menuBar" ).slideToggle( "normal", function() {

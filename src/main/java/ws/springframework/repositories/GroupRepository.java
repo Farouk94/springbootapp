@@ -13,7 +13,7 @@ public interface GroupRepository extends CrudRepository<Group, Integer> {
 
     public void deleteByName(String name);
 
-    @Query(value = "SELECT name  ,COUNT (group_members_email_adresse) FROM group_users JOIN groups ON group_users.group_id=groups.id GROUP BY name", nativeQuery = true)
+    @Query(value = "SELECT name  ,COUNT (group_members_id) FROM group_users JOIN groups ON group_users.group_id=groups.id GROUP BY name", nativeQuery = true)
     public Stream<Object> getGroupNamesAndCount();
 
     public Collection<Group> findByAdminEmail(String adresse) ;

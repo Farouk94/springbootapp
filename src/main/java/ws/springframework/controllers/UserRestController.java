@@ -5,6 +5,7 @@ import ws.springframework.domain.Group;
 import ws.springframework.domain.User;
 import ws.springframework.exceptions.RegistredException;
 import ws.springframework.forms.GroupForm;
+import ws.springframework.repositories.CommentsRepository;
 import ws.springframework.services.GroupService;
 import ws.springframework.services.UserService;
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
@@ -19,13 +20,19 @@ import java.util.Collection;
  * Created by farou_000 on 29/10/2016.
  */
 
-//@Secured(value={"ROLE_Admin"}) a implementer apres
+
 @RestController
 public class UserRestController {
 
 
     private UserService userService;
     private GroupService groupService;
+    private CommentsRepository commentsRepository ;
+
+    @Autowired
+    public void setCommentsRepository(CommentsRepository commentsRepository) {
+        this.commentsRepository = commentsRepository;
+    }
 
 
     @Autowired
@@ -40,7 +47,7 @@ public class UserRestController {
     }
 
     //user changes his/her full name
-    @RequestMapping(value = "user/edit/fullName")
+    @RequestMapping(value = "json/user/edit/fullName/{firstName}/{lastName}")
     public User editFullName(HttpServletRequest httpServletRequest, @RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName) {
         userService.getUserByEmail(userService.getLoggedUser(httpServletRequest).get("username").toString())
                 .setFirstName(firstName);
@@ -54,7 +61,7 @@ public class UserRestController {
 
 
     // user changes his/her biography
-    @RequestMapping(value = "user/edit/biography")
+    @RequestMapping(value = "json/user/edit/biography/{biography}")
     public User editBiography(HttpServletRequest httpServletRequest, @RequestParam("biography") String biography) {
         userService.getUserByEmail(userService.getLoggedUser(httpServletRequest).get("username").toString())
                 .setBiography(biography);
@@ -66,7 +73,7 @@ public class UserRestController {
     }
 
     //user deletes his/her account
-    @RequestMapping(value = "user/delete", method = RequestMethod.DELETE)
+    @RequestMapping(value = "json/user/delete", method = RequestMethod.DELETE)
     public ResponseEntity delete(HttpServletRequest httpServletRequest) {
         for (Group g : groupService.listAllGroups()) {
             if (g.getGroupMembers().contains(userService.getUserByEmail(userService.getLoggedUser(httpServletRequest).get("username").toString())))
@@ -79,7 +86,7 @@ public class UserRestController {
 
     //user creates new group
 
-    @RequestMapping(value = "user/new/group", method = RequestMethod.POST)
+    @RequestMapping(value = "json/user/new/group", method = RequestMethod.POST)
     public ResponseEntity<Group> saveGroup(@RequestBody GroupForm form) {
         Group group = new Group();
         group.setName(form.getName());
@@ -92,7 +99,7 @@ public class UserRestController {
     }
 
     //edit description of a group he owns
-    @RequestMapping(value = "user/group/edit")
+    @RequestMapping(value = "json/user/group/edit/{name}/{description}")
     public Group editMyGroupDescription(HttpServletRequest httpServletRequest,
                                         @RequestParam("name") String name, @RequestParam("description") String description) {
         if (groupService.getGroupByName(name).getAdminEmail().
@@ -105,7 +112,7 @@ public class UserRestController {
     }
     //user view a list of groups and membership count
 
-    @RequestMapping(value = "user/groups", method = RequestMethod.GET)
+    @RequestMapping(value = "json/user/groups", method = RequestMethod.GET)
     public ResponseEntity getAllGroupNamesAndCount() {
 
         return new ResponseEntity<>(groupService.getGroupNamesAndCount(), HttpStatus.OK);
@@ -113,7 +120,7 @@ public class UserRestController {
 
     //user joins group
 
-    @RequestMapping(value = "user/group/join", method = RequestMethod.GET)
+    @RequestMapping(value = "json/user/group/join/{name}", method = RequestMethod.GET)
     public Group joinGroup(HttpServletRequest httpServletRequest, @RequestParam("name") String name) {
 
         if (groupService.getGroupByName(name).getGroupMembers().contains(userService.getUserByEmail(userService.getLoggedUser(httpServletRequest).
@@ -127,17 +134,17 @@ public class UserRestController {
     }
 
     //user views members of the group he/she owns or has joined
-    @RequestMapping(value = "user/group/view", method = RequestMethod.GET)
+    @RequestMapping(value = "json/user/group/view/{name}", method = RequestMethod.GET)
     public Collection<User> viewMyGroupMembers(@RequestParam("name") String name) {
         return groupService.getGroupByName(name).getGroupMembers();
     }
 
     //user comments on the dashbord of the group
-    // implementer entité commentairE avec un mapping one tomany avec group
+
 
 
     //user leaves the group
-    @RequestMapping(value = "user/group/leave", method = RequestMethod.GET)
+    @RequestMapping(value = "json/user/group/leave/{name}", method = RequestMethod.GET)
     public Collection<User> leaveGroup(HttpServletRequest httpServletRequest, @RequestParam("name") String name) {
         if (!groupService.getGroupByName(name).getGroupMembers().
                 contains(userService.getUserByEmail(userService.getLoggedUser(httpServletRequest).
@@ -152,17 +159,31 @@ public class UserRestController {
 
 
     //user check the profile of other users
-    @RequestMapping(value = "user", method = RequestMethod.GET)
+    @RequestMapping(value = "json/user/{firstName}/{lastName}", method = RequestMethod.GET)
     public Collection<User> getUser(@RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName) {
         return userService.findByFirstNameAndLastName(firstName, lastName);
     }
 
     // user comments on the dashboard of the group
-    @RequestMapping(value = "comment", method = RequestMethod.GET)
-    public Comment commentDashBoard(@RequestParam("GroupName") String GroupName, @RequestParam("comment") String comment) {
-        groupService.addCommentToDashboard(groupService.getGroupByName(GroupName), groupService.getCommentByName(comment));
-        return groupService.getCommentByName(comment);
+    @RequestMapping(value = "json/comment/{groupName}/{comment}", method = RequestMethod.GET)
+    public Collection<Comment> commentDashBoard(@RequestParam("groupName") String groupName, @RequestParam("comment") String comment , HttpServletRequest httpServletRequest) {
 
+
+
+        String email = userService.getLoggedUser(httpServletRequest).get("username").toString() ;
+        Comment comment1 = new Comment();
+
+        comment1.setComment(comment);
+        comment1.setOwnerfirstName(userService.getFNofCommentOwner(email));
+        comment1.setOwnerLastName(userService.getLNofCommentOwner(email));
+        commentsRepository.save(comment1) ;
+
+
+
+        userService.addCommentToUser((userService.getUserByEmail(email)),comment1);
+
+        groupService.addCommentToDashboard(groupService.getGroupByName(groupName) , comment1);
+                return  groupService.getGroupByName(groupName).getDiscutionBoard();
     }
 
 
